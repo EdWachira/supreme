@@ -30,6 +30,10 @@ app.set("views", path.join(__dirname, "views"));
 // Access-Control-Allow-Origin
 app.use(cors());
 
+// app.use(cors({
+//   origin: "https://safe-waters-68990.herokuapp.com/"
+// }));
+
 app.options("*", cors());
 
 // Serving static files

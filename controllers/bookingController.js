@@ -1,4 +1,4 @@
-const Stripe = require("stripe");
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Tour = require("../models/tourModel");
 const User = require("../models/userModel");
 const Booking = require("../models/bookingModel");
@@ -7,8 +7,6 @@ const factory = require("./handlerFactory");
 
 exports.getCheckoutSessuion = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.tourId);
-
-  const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
@@ -22,7 +20,7 @@ exports.getCheckoutSessuion = catchAsync(async (req, res, next) => {
     line_items: [
       {
         price_data: {
-          currency: "inr",
+          currency: "kes",
           unit_amount: tour.price * 100,
           product_data: {
             name: `${tour.name} Tour`,
@@ -64,7 +62,6 @@ const createBookingCheckout = async (session) => {
 };
 
 exports.webHookCheckout = (req, res, next) => {
-  const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
   const signature = req.headers["stripe-signature"];
   let event;
   try {
