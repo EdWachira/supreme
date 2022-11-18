@@ -40,22 +40,22 @@ app.options("*", cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Set security HTTP Headers
-app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }));
-app.use(
-  helmet.contentSecurityPolicy({
-    useDefaults: true,
-    directives: {
-      defaultSrc: ["'self'", "data:", "blob:", "https://js.stripe.com/"],
-      imgSrc: ["'self'", "https: data: blob:"],
-      scriptSrc: [
-        "'self'",
-        "https://*.cloudflare.com",
-        "https://js.stripe.com/v3/",
-      ],
-      // connectSrc: ["'self'", "blob:"],
-    },
-  })
-);
+// app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }));
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     useDefaults: true,
+//     directives: {
+//       defaultSrc: ["'self'", "data:", "blob:", "https://js.stripe.com/"],
+//       imgSrc: ["'self'", "https: data: blob:"],
+//       scriptSrc: [
+//         "'self'",
+//         "https://*.cloudflare.com",
+//         "https://js.stripe.com/v3/",
+//       ],
+//       // connectSrc: ["'self'", "blob:"],
+//     },
+//   })
+// );
 
 const limiter = rateLimit({
   max: 100,
