@@ -21,23 +21,16 @@ exports.getCheckoutSessuion = catchAsync(async (req, res, next) => {
     client_reference_id: req.params.tourId,
     line_items: [
       {
-        price_data: {
-          currency: "usd",
-          unit_amount: tour.price * 100,
-          product_data: {
-            name: `${tour.name} Tour`,
-            description: tour.summary,
-            images: [
-              `${req.protocol}://${req.get("host")}/img/tours/${
-                tour.imageCover
-              }`,
-            ],
-          },
-        },
+        name: `${tour.name} Tour`,
+        description: tour.summary,
+        images: [
+          `${req.protocol}://${req.get('host')}/img/tours/${tour.imageCover}`,
+        ],
+        amount: tour.price * 100,
+        currency: 'usd',
         quantity: 1,
       },
     ],
-    mode: "payment",
   });
 
   res.status(200).json({
