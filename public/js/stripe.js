@@ -9,7 +9,7 @@ export const bookTour = async (tourId) => {
   try {
     const stripe = window.Stripe('pk_test_51M40IKLWFD9go2aioOdXJZYnWOzR9PJHxyxaXdNmXrItzdXkjExpnIHZsjotSudHyPINKdIk89OcL39bciMV074i00ydnnIvzS');
     const session = await axios(
-      `https://safe-waters-68990.herokuapp.com/bookings/checkout-session/${tourId}`
+      `api/v1/bookingscheckout-session/${tourId}`
     );
 
     await stripe.redirectToCheckout({
@@ -17,6 +17,7 @@ export const bookTour = async (tourId) => {
     });
 
   } catch (err) {
+    console.log(err)
     showAlert('error', err);
   }
 }
