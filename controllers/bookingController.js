@@ -1,5 +1,5 @@
 const stripe = require('stripe')('sk_test_51M40IKLWFD9go2aiJGA0Hi60ObA7BhYtQd8RnbmcB6MUKqpqAC1IWlJZH487rpPGVJqLCnyKxELKOINFnqx4JFoV006AN96STO', {
-  apiVersion: '2020-08-27',
+  apiVersion: '2019-05-16',
 });
 const Tour = require("../models/tourModel");
 const User = require("../models/userModel");
