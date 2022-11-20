@@ -1,5 +1,5 @@
 const stripe = require('stripe')('sk_test_51M40IKLWFD9go2aiJGA0Hi60ObA7BhYtQd8RnbmcB6MUKqpqAC1IWlJZH487rpPGVJqLCnyKxELKOINFnqx4JFoV006AN96STO', {
-  apiVersion: '2019-05-16',
+  apiVersion: '2019-03-14',
 });
 const Tour = require("../models/tourModel");
 const User = require("../models/userModel");
@@ -7,7 +7,7 @@ const Booking = require("../models/bookingModel");
 const catchAsync = require("../utils/catchAsync");
 const factory = require("./handlerFactory");
 
-exports.getCheckoutSessuion = catchAsync(async (req, res, next) => {
+exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const tour = await Tour.findById(req.params.tourId);
 
   const session = await stripe.checkout.sessions.create({
@@ -56,7 +56,7 @@ const createBookingCheckout = async (session) => {
   await Booking.create({ tour, user, price });
 };
 
-exports.webHookCheckout = (req, res, next) => {
+exports.webhookCheckout = (req, res, next) => {
   const signature = req.headers["stripe-signature"];
   let event;
   try {
