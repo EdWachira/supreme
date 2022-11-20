@@ -15,6 +15,8 @@ export const bookTour = async (tourId) => {
     await stripe.redirectToCheckout({
       sessionId: session.data.session.id
     });
+    console.log(session);
+    console.log(stripe);
 
   } catch (err) {
     console.log(err)
